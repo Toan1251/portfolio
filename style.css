@@ -9,27 +9,45 @@ html {
     font-size: 16px;
 }
 
+h2{
+    font-size: 1.875em;
+    font-weight: 800;
+}
+
 /*Header Section*/
 header {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+    max-height: 80px;
     padding: 5px 5%;
+}
+
+.logo {
+    min-width: 25%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 80%;
+    margin: auto 12px;
+    border-radius: 50%;
 }
 
 h1 {
     display: block;
-    min-width: 20%;
-    text-align: center;
+    text-align: left;
     font-size: 2em;
-    font-weight: 700;
+    font-weight: 900;
 }
 
 nav {
     display: flex;
     justify-content: space-evenly;
-    align-items: stretch;
-    padding: 0px 10px;
+    align-items: center;
+    padding: 10px 10px;
 }
 
 a {
@@ -37,4 +55,27 @@ a {
     text-align: center;
     margin: auto 5px;
     color: #474747;
+    font-size: 1.2em;
+    min-width: 80px;
+}
+/*Main section*/
+main{
+    padding: 5px 10.5%;
+}
+/*About me */
+/*Game*/
+#game h3{
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 1.60em;
+}
+
+#game ol{
+    list-style: decimal;
+}
+
+#game img {
+    width: 60%;
+    height: auto;
+    /*display: none;*/
 }
