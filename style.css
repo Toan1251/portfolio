@@ -80,3 +80,36 @@ main{
     /*display: none;*/
 }
 
+/*Album section*/
+
+.img-container{
+    display:flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    overflow-x: scroll;
+    margin-bottom: 15px;
+    max-width: 50%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#album img {
+    height: 100px;
+}
+
+#album img:hover {
+    height: 120px;
+}
+
+.render {
+    width: 40%;
+    height: auto;
+}
+
+.render img {
+    width: 100%;
+}
