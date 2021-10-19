@@ -4,82 +4,60 @@ const leftArrow = album.querySelector('#left');
 const rightArrow = album.querySelector('#right');
 
 const display = album.querySelector('.displaying');
-const noDisplayLeft = album.querySelector('.no-display-left');
-const noDisplayRight = album.querySelector('.no-display-right');
 const render = album.querySelector('#render-img');
+const container = album.querySelector('.container');
 
 let focus_index = 0;
-display.querySelectorAll('img')[focus_index].style.opacity = 1;
+let start_point = 0;
+let end_point = 10;
+const MID = 5;
+const imgList = container.querySelectorAll(' img:not(.arrow)');
+const MAX_END = imgList.length-1;
 
-const toRight = () => {
-    console.log('rightclick');
-    const focus = display.querySelectorAll('img');
-    if(focus_index < 5 && !noDisplayLeft.childElementCount){
-        focus[focus_index].style.opacity = 0.5;
-        focus_index++;
-        focus[focus_index].style.opacity = 1;
-        rendering(focus[focus_index].getAttribute('src'));
-    } 
-    else if(focus_index >= 5 && !noDisplayRight.childElementCount && focus_index < 10){
-        focus[focus_index].style.opacity = 0.5;
-        focus_index++;
-        focus[focus_index].style.opacity = 1;
-        rendering(focus[focus_index].getAttribute('src'));
-    } else if(noDisplayRight.childElementCount) {
-        const item_left = display.firstElementChild;
-        const item_right = noDisplayRight.firstElementChild;
-        noDisplayLeft.append(item_left);
-        display.append(item_right);
-        focus[focus_index+1].style.opacity = 1;
-        focus[focus_index].style.opacity = 0.5;
-        rendering(focus[focus_index+1].getAttribute('src'));
+const focus = index => {
+    imgList[focus_index].style.opacity = 0.5;
+    focus_index = index;
+    imgList[focus_index].style.opacity = 1;
+    render.setAttribute('src', imgList[focus_index].getAttribute('src'));
+}
+
+rightArrow.addEventListener('click', () => {
+    if(end_point - focus_index > MID){
+        focus(focus_index+1);
+    }else{
+        end_point = Math.min(MAX_END, end_point+1);
+        start_point = end_point - 2*MID;
+        display.append(imgList[end_point]);
+        if(start_point > 0){
+            display.before(imgList[start_point-1]);
+        }
+        focus(Math.min(end_point, focus_index+1));
     }
-}
+})
 
-const toLeft = () => {
-    console.log('leftclick');
-    const focus = display.querySelectorAll('img');
-    if(focus_index <= 5 && !noDisplayLeft.childElementCount && focus_index > 0){
-        focus[focus_index].style.opacity = 0.5;
-        focus_index--;
-        focus[focus_index].style.opacity = 1;
-        rendering(focus[focus_index].getAttribute('src'));
-    } 
-    else if(focus_index > 5 && !noDisplayRight.childElementCount && focus_index < 10){
-        focus[focus_index].style.opacity = 0.5;
-        focus_index--;
-        focus[focus_index].style.opacity = 1;
-        rendering(focus[focus_index].getAttribute('src'));
-    } else if(noDisplayLeft.childElementCount) {
-        const item_left = noDisplayLeft.lastElementChild;
-        const item_right = display.lastElementChild;
-        display.prepend(item_left);
-        noDisplayRight.prepend(item_right);
-        focus[focus_index-1].style.opacity = 1;
-        focus[focus_index].style.opacity = 0.5
-        rendering(focus[focus_index-1].getAttribute('src'));
+leftArrow.addEventListener('click', () => {
+    if(focus_index - start_point > MID){
+        focus(focus_index-1); 
+    }else {
+        start_point = Math.max(0, start_point-1);
+        end_point = start_point + 2*MID;
+        display.prepend(imgList[start_point]);
+        if(end_point < MAX_END){
+            display.after(imgList[end_point+1]);
+        }
+        focus(Math.max(start_point, focus_index-1));
     }
-}
+})
 
-const rendering = url_img => {
-    console.log(url_img);
-    render.setAttribute('src', url_img);
-}
-
-rightArrow.addEventListener('click', toRight);
-leftArrow.addEventListener('click', toLeft);
-
-const imgList = album.querySelectorAll('.container img:not(.arrow)');
 imgList.forEach(img => {
     img.addEventListener('click', () => {
-        rendering(img.getAttribute('src'));
-        const focus = display.querySelectorAll('img');
-        for(let i = 0; i < focus.length; i++) {
-            if(img == focus[i]){
-                focus[focus_index].style.opacity = 0.5;
-                focus_index = i;
-                focus[focus_index].style.opacity = 1;
+        for(let i=start_point; i<=end_point; i++){
+            if(img == imgList[i]){
+                focus(i);
+                break;
             }
         }
     })
 })
+
+focus(0);
