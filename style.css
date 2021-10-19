@@ -21,6 +21,10 @@ header {
     align-items: stretch;
     max-height: 80px;
     padding: 5px 5%;
+    position: sticky;
+    top: 0px;
+    background-color: #eaeaea;
+    z-index: 1;
 }
 
 .logo {
@@ -165,4 +169,11 @@ footer {
     display:flex;
     justify-content: space-between;
     padding: 0px 3%;
+}
+
+/*Contact*/
+
+#contact img {
+    width: 40px;
+    margin: 10px 25px 10px 0px;
 }
