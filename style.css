@@ -101,17 +101,16 @@ main{
     align-items: center;
 }
 
-#album img {
+.img-container img{
     height: 100px;
 }
 
-#album img:hover {
+.img-container img:hover {
     height: 150px;
 }
 
 .render {
     width: 40%;
-    height: auto;
 }
 
 .render img {
