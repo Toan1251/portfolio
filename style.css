@@ -80,6 +80,10 @@ main{
     /*display: none;*/
 }
 
+#game div {
+    display: none;
+}
+
 /*Album section*/
 
 .img-container{
@@ -102,7 +106,7 @@ main{
 }
 
 #album img:hover {
-    height: 120px;
+    height: 150px;
 }
 
 .render {
@@ -112,4 +116,11 @@ main{
 
 .render img {
     width: 100%;
+}
+
+footer {
+    line-height: 1.1;
+    display:flex;
+    justify-content: space-between;
+    padding: 0px 3%;
 }
